@@ -2,7 +2,7 @@
 """
 Created on Tue Mar 30 21:33:31 2021
 
-@author: cmayi
+@author: Ilunga Christopher, Assaouci Younes
 """
 
 class Task:
