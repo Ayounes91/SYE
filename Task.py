@@ -21,24 +21,24 @@ class Task:
         global cpt
         cpt = cpt + 1
         
-    """def description(t):
-        print("Nom :"+t.name+"\n")
+    def description(t):
+        print("Nom :"+t.name+)
         print("Lecture : ")
         if(len(t.reads)==0):
-            print("Rien\n")
+            print("Rien")
         else:
             print(t.reads)
         print("Ecriture : ")
         if(len(t.writes)==0):
-            print("Rien\n")
+            print("Rien")
         else:
             print(t.writes)
-        if(t.run==runT1):
+        if(t.run==Task.runT1):
             print("Run = runT1\n")
-        elif(t.run==runT2):
+        elif(t.run==Task.runT2):
             print("Run = runT2\n")
         else:
-            print("Run = runTSomme\n")"""
+            print("Run = runTSomme\n")
             
     def runT1():
         global X
@@ -60,7 +60,7 @@ class Task:
         writes = set()
         run = None
         while(i!="0"):    
-            i = input("Entrer lecture (X,Y,Z ou 0 pour arrêter) :")
+            i = input(name+": Entrer lecture (X,Y,Z ou 0 pour arrêter) :")
             if(i=="0"):
                 i=None
                 break
@@ -76,7 +76,7 @@ class Task:
                 break
             
         while(i!="0"):
-            i = input("Entrer écriture (X,Y,Z ou 0 pour arrêter) :")
+            i = input(name+": Entrer écriture (X,Y,Z ou 0 pour arrêter) :")
             if(i=="0"):
                 i=None
                 break
@@ -99,7 +99,6 @@ class Task:
             run = Task.runT2
         elif(i=="+"):
             run = Task.runTSomme
-        #Task.description((name,reads,writes,run))
         return Task(name,reads,writes,run)
             
             
