@@ -22,7 +22,7 @@ class Task:
         cpt = cpt + 1
         
     def description(t):
-        print("Nom :"+t.name+)
+        print("Nom :"+t.name)
         print("Lecture : ")
         if(len(t.reads)==0):
             print("Rien")
@@ -67,9 +67,9 @@ class Task:
             else:
                 reads.add(i)
             if(len(reads)==0):
-                print(name+"ne lit rien.\n")
+                print(name+" ne lit rien.\n")
             else:
-                print(name+"lit")
+                print(name+" lit")
                 print(reads)
             if(len(reads)==3): #Si on lit les 3 variables, on peut break
                 i=None          #Pas besoin de continuer la saisie
@@ -83,9 +83,9 @@ class Task:
             else:
                 writes.add(i)
             if(len(writes)==0):
-                print(name+"n'écrit rien.\n")
+                print(name+" n'écrit rien.\n")
             else:
-                print(name+"lit les tâches")
+                print(name+" écrit les tâches")
                 print(writes)
             if(len(writes)==3):
                 i=None
@@ -100,6 +100,16 @@ class Task:
         elif(i=="+"):
             run = Task.runTSomme
         return Task(name,reads,writes,run)
+    
+    def test(t):
+        print("X="+str(X))
+        print("Y="+str(Y))
+        print("Z="+str(Z))
+        t.run()
+        print("X="+str(X))
+        print("Y="+str(Y))
+        print("Z="+str(Z))
+    
             
             
         
