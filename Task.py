@@ -64,7 +64,7 @@ class Task:
             if(i=="0"):
                 i=None
                 break
-            else:
+            elif(i in ["X","Y","Z"]):
                 reads.add(i)
             if(len(reads)==0):
                 print(name+" ne lit rien.\n")
@@ -80,7 +80,7 @@ class Task:
             if(i=="0"):
                 i=None
                 break
-            else:
+            elif(i in ["X","Y","Z"]):
                 writes.add(i)
             if(len(writes)==0):
                 print(name+" n'écrit rien.\n")
