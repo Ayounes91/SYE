@@ -13,14 +13,33 @@ class Task:
     Z = 0
     cpt = 1 #Compteur => T1,T2... jusqu'à Tn
     
-    def __init__(name,reads,writes,run):
-        name.reads = reads
-        name.writes = writes
-        name.run = run
+    def __init__(self,name,reads,writes,run):
+        self.reads = reads
+        self.name = name
+        self.writes = writes
+        self.run = run
         global cpt
         cpt = cpt + 1
         
-    
+    """def description(t):
+        print("Nom :"+t.name+"\n")
+        print("Lecture : ")
+        if(len(t.reads)==0):
+            print("Rien\n")
+        else:
+            print(t.reads)
+        print("Ecriture : ")
+        if(len(t.writes)==0):
+            print("Rien\n")
+        else:
+            print(t.writes)
+        if(t.run==runT1):
+            print("Run = runT1\n")
+        elif(t.run==runT2):
+            print("Run = runT2\n")
+        else:
+            print("Run = runTSomme\n")"""
+            
     def runT1():
         global X
         X = X+5
@@ -35,54 +54,57 @@ class Task:
         
     def newTask():
         global cpt
-        name = "T"+cpt
+        name = "T"+str(cpt)
         i = None
-        name = ""
-        reads = {} #{} = ensemble, donc impossible d'entrer une même valeur deux fois
-        writes = {}
+        reads = set() #ensemble, donc impossible d'entrer une même valeur deux fois
+        writes = set()
         run = None
-        while(i!=0):    
+        while(i!="0"):    
             i = input("Entrer lecture (X,Y,Z ou 0 pour arrêter) :")
-            if(i==0):
+            if(i=="0"):
                 i=None
                 break
             else:
                 reads.add(i)
-            if(reads=={}):
+            if(len(reads)==0):
                 print(name+"ne lit rien.\n")
             else:
-                print(name+"lit"+reads)
+                print(name+"lit")
+                print(reads)
             if(len(reads)==3): #Si on lit les 3 variables, on peut break
                 i=None          #Pas besoin de continuer la saisie
                 break
             
-        while(i!=0):
+        while(i!="0"):
             i = input("Entrer écriture (X,Y,Z ou 0 pour arrêter) :")
-            if(i==0):
+            if(i=="0"):
                 i=None
                 break
             else:
                 writes.add(i)
-            if(writes=={}):
+            if(len(writes)==0):
                 print(name+"n'écrit rien.\n")
             else:
-                print(name+"lit les tâches"+reads)
+                print(name+"lit les tâches")
+                print(writes)
             if(len(writes)==3):
                 i=None
                 break
-        while(i not in [1,2,"+"]):
+        while(i not in ["1","2","+"]):
             print("Que réalise cette tâche ?\n")
             i = input("runT1 (1) | runT2 (2)| runTSomme (+)")
-        if(i==1):
+        if(i=="1"):
             run = Task.runT1
-        elif(i==2):
+        elif(i=="2"):
             run = Task.runT2
         elif(i=="+"):
             run = Task.runTSomme
-        return Task.__init__(name,reads,writes,run)
+        #Task.description((name,reads,writes,run))
+        return Task(name,reads,writes,run)
             
             
         
                 
+
             
         
