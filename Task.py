@@ -4,6 +4,7 @@ Created on Tue Mar 30 21:33:31 2021
 
 @author: Ilunga Christopher, Assaouci Younes
 """
+import random
 
 class Task:
     global X,Y,Z #3 variables de lecture/ecriture
@@ -22,7 +23,7 @@ class Task:
         cpt = cpt + 1
         
     def description(t):
-        print("Nom :"+t.name)
+        print("Nom : "+t.name)
         print("Lecture : ")
         if(len(t.reads)==0):
             print("Rien")
@@ -51,6 +52,19 @@ class Task:
     def runTSomme():
         global Z
         Z = X+Y+Z
+        
+    def generate():
+        global cpt
+        name = "T"+str(cpt)
+        
+        reads = set() #ensemble, donc impossible d'entrer une même valeur deux fois
+        writes = set()
+        run = None
+        
+        reads = random.choice(["X","Y","Z",""])
+        writes = random.choice(["X","Y","Z",""])
+        run = random.choice([Task.runT1, Task.runT2, Task.runTSomme])
+        return Task(name,reads,writes,run)
         
     def newTask():
         global cpt
