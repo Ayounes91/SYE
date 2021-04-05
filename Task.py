@@ -12,9 +12,9 @@ class Task:
     X = 0
     Y = 0
     Z = 0
-    cpt = 1 #Compteur => T1,T2... jusqu'à Tn
+    cpt = 1 #Compteur global => T1,T2... jusqu'à Tn
     
-    def __init__(self,name,reads,writes,run):
+    def __init__(self,name,reads,writes,run): #initialisation de la classe Task
         self.reads = reads
         self.name = name
         self.writes = writes
@@ -22,7 +22,7 @@ class Task:
         global cpt
         cpt = cpt + 1
         
-    def description(t):
+    def description(t): #description d'une tâche
         print("Nom : "+t.name)
         print("Lecture : ")
         if(len(t.reads)==0):
@@ -53,9 +53,9 @@ class Task:
         global Z
         Z = X+Y+Z
         
-    def generate():
-        global cpt
-        name = "T"+str(cpt)
+    def generate(): #permet de générer des tâches de manière automatique
+        global cpt #dans le but de gagner du temps dans les tests du programme =>
+        name = "T"+str(cpt) #voir TaskSystem.creerSystemeAuto()
         
         reads = set() #ensemble, donc impossible d'entrer une même valeur deux fois
         writes = set()
@@ -66,14 +66,14 @@ class Task:
         run = random.choice([Task.runT1, Task.runT2, Task.runTSomme])
         return Task(name,reads,writes,run)
         
-    def newTask():
-        global cpt
+    def newTask(): #permet de créer des tâches manuellement => 
+        global cpt #voir TaskSystem.creerSysteme()
         name = "T"+str(cpt)
         i = None
         reads = set() #ensemble, donc impossible d'entrer une même valeur deux fois
         writes = set()
         run = None
-        while(i!="0"):    
+        while(i!="0"): #tant qu'on n'entre pas 0, on continue de demander les variables lues par la tâche
             i = input(name+": Entrer lecture (X,Y,Z ou 0 pour arrêter) :")
             if(i=="0"):
                 i=None
@@ -89,7 +89,7 @@ class Task:
                 i=None          #Pas besoin de continuer la saisie
                 break
             
-        while(i!="0"):
+        while(i!="0"): #tant qu'on n'entre pas 0, on continue de demander les variables écrites par la tâche
             i = input(name+": Entrer écriture (X,Y,Z ou 0 pour arrêter) :")
             if(i=="0"):
                 i=None
@@ -115,8 +115,8 @@ class Task:
             run = Task.runTSomme
         return Task(name,reads,writes,run)
     
-    def test(t):
-        print("X="+str(X))
+    def test(t): #simple test pour nous programmeurs
+        print("X="+str(X)) #on teste les variables avant et après exécution d'une tâche
         print("Y="+str(Y))
         print("Z="+str(Z))
         t.run()
