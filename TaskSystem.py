@@ -28,14 +28,14 @@ class TaskSystem:
         return liste
     
     def getDependencies(t,dic):
-        dependance = dic.get(t.name)
+        dependance = dic.get(t)
         if len(dependance)==0:
             print(t.name+" n'a aucune dépendance.")
         else:
             print("Dépendances de "+t.name)
             for k in dependance:
-                print(k+" ")
-        
+                print(k.name)
+   
         
     
     def dic(liste):
@@ -49,19 +49,30 @@ class TaskSystem:
         for k in liste:
             precList = []
             prec = None
+            ind = liste.index(k)
             while(prec!="0"):
                 
                 prec = input("Quelle tâche précède "+k.name+"? (Entrer numéro de la tâche, 0 pour quitter)")
-                
-                if(prec=="0"):
-                    dic.update({k.name:precList})
+                if(int(prec)-1==ind):
+                    print(k.name+" ne peut dépendre de lui même.")
+                elif(prec=="0"):
+                    dic.update({k:precList})
                     break
+                elif(int(prec)-1 not in range(l)):
+                    print("Erreur. Il n'y a que "+str(l)+" tâches.")
+                elif(liste[int(prec)-1] in precList):
+                    print("Cette dépendance a déjà été saisie.")
+
                 else:
-                    precList.append(liste[int(prec)-1].name)
-            
-            
-            
-        print(dic)
+                    check = dic.get(liste[int(prec)-1])
+                    if (check == None):
+                        precList.append(liste[int(prec)-1])
+                    elif(k in check):
+                        print("Impossible. "+liste[int(prec)-1].name+" est déjà dépendant de "+k.name+".")
+                    
+        for i in liste:
+            TaskSystem.getDependencies(i, dic)
+        TaskSystem.ordonnancement(dic)
         return dic
           
     
@@ -71,6 +82,17 @@ class TaskSystem:
         for i in liste:
             TaskSystem.getDependencies(i,dictionnaire)
         return TaskSystem(liste,dictionnaire)
+    
+    
+    
+    def ordonnancement(dic):
+        ordre = {}
+        for i in dic:
+            ordre.update({i.name:len(dic.get(i))})
+        ordre = sorted(ordre.items(), key=lambda x : x[1])   
+        for j in ordre:
+            print(j)
+        
         
     def creerSystemeAuto():
         print("Système de tâches automatisé.")
@@ -85,11 +107,13 @@ class TaskSystem:
         for i in liste:
             print(Task.description(i))
         dictionnaire = TaskSystem.dic(liste)
-        for i in liste:
-            TaskSystem.getDependencies(i,dictionnaire)
-        return TaskSystem(liste,dictionnaire)
-                    
         
+        return TaskSystem(liste,dictionnaire)
+               
+
+    
+        
+    
             
            
            
