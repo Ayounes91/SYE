@@ -123,6 +123,11 @@ class Task:
         print("X="+str(X))
         print("Y="+str(Y))
         print("Z="+str(Z))
+        
+    def afficher(): #afficher la valeur des variables
+        print("X="+str(X))
+        print("Y="+str(Y))
+        print("Z="+str(Z))
     
             
             

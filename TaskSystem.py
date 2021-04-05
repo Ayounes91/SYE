@@ -2,7 +2,7 @@
 """
 Created on Wed Mar 31 20:02:02 2021
 
-@author: cmayi
+@author: Ilunga Christopher, Assaouci Younes
 """
 
 from Task import Task
@@ -74,28 +74,35 @@ class TaskSystem:
             TaskSystem.getDependencies(i, dic) #résultat du dictionnaire
             #on choisit de l'afficher de la sorte car cela permet d'obtenir le nom des tâches directement
             #sachant que le dictionnaire, lui, enregistre l'objet Task et non pas son nom
-        TaskSystem.ordonnancement(dic)
+        
         return dic
           
     
     def creerSysteme(): #permet de créer un système manuellement
         liste = TaskSystem.TaskList()
         dictionnaire = TaskSystem.dic(liste)
-        for i in liste:
-            TaskSystem.getDependencies(i,dictionnaire)
+        TaskSystem.run(TaskSystem.ordonnancement(liste,dictionnaire))
         return TaskSystem(liste,dictionnaire)
     
     
     
-    def ordonnancement(dic):
-        ordre = {}
-        for i in dic:
-            ordre.update({i.name:len(dic.get(i))})
-        ordre = sorted(ordre.items(), key=lambda x : x[1])
+    def ordonnancement(liste,dic): #Doit ordonner les tâches dans la liste d'execution
+        ordre = liste
+        for i in liste:
+           ""
+        
         
         return ordre
 
-
+    def run(liste):
+        Task.afficher()
+        for i in liste:
+            print("Execution de "+i.name)
+            i.run()
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        print("Executions terminées.")
+        Task.afficher()
+        
         
     def creerSystemeAuto(): #permet de créer un système de manière automatique
                             #cela ne permet de créer qu'un certain nombre de tâches
@@ -105,6 +112,7 @@ class TaskSystem:
         rep = None
         liste = []
         rep = int(input("Combien de tâches voulez-vous créer ? (entre 2 et 5)"))
+        #reprend le même procédé que TaskList()
         while(rep not in range(2,6)):
             print("Erreur de saisie.")
             rep = int(input("Combien de tâches voulez-vous créer ? (entre 2 et 5)"))
@@ -113,7 +121,7 @@ class TaskSystem:
         for i in liste:
             print(Task.description(i))
         dictionnaire = TaskSystem.dic(liste)
-        
+        TaskSystem.run(TaskSystem.ordonnancement(liste,dictionnaire))
         return TaskSystem(liste,dictionnaire)
                
 
